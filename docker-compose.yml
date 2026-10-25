@@ -1,0 +1,24 @@
+# Local Postgres for development and tests. Not used in deployment.
+services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    # Local only: trade crash-durability for speed (test resets TRUNCATE every table).
+    command: ["postgres", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off"]
+    environment:
+      POSTGRES_USER: fz
+      POSTGRES_PASSWORD: fz
+      POSTGRES_DB: fantasticzone
+    ports:
+      - "5432:5432"
+    volumes:
+      - fz_pgdata:/var/lib/postgresql/data
+      - ./docker/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fz -d fantasticzone"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  fz_pgdata:

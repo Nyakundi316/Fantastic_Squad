@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* §3 tokens as RGB channels so Tailwind opacity modifiers work. */
+    --background: 247 247 249; /* #F7F7F9 */
+    --surface: 255 255 255; /* #FFFFFF */
+    --foreground: 15 17 23; /* #0F1117 */
+    --muted-foreground: 90 96 114; /* #5A6072 */
+    --muted: 241 242 245;
+    --border: 229 231 235; /* #E5E7EB */
+    --primary: 91 61 245; /* #5B3DF5 */
+    --primary-hover: 74 47 224; /* #4A2FE0 */
+    --success: 22 163 74; /* #16A34A */
+    --success-soft: 236 253 243;
+    --warning: 217 119 6; /* #D97706 */
+    --warning-soft: 255 247 237;
+    --danger: 220 38 38; /* #DC2626 */
+    --danger-soft: 254 242 242;
+    --info: 37 99 235; /* #2563EB */
+    --info-soft: 239 246 255;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold leading-tight tracking-tight;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

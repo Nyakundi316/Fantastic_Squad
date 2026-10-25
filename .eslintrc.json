@@ -1,0 +1,12 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.name='parseFloat']",
+        "message": "No floats for money or weight (hard rule 2). Use Prisma.Decimal or integer grams/mm."
+      }
+    ]
+  }
+}
